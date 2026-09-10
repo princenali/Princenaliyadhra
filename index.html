@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f172a">
+<title>Digital Seva — Online Services</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f172a;--blue:#2563eb;--cyan:#06b6d4;--green:#16a34a;--bg:#f5f8ff;--card:#fff;--text:#172033;--muted:#64748b}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#eef6ff,#f8f5ff);color:var(--text);min-height:100vh}
+button,input{font:inherit}
+.hidden{display:none!important}
+.screen{min-height:100vh}
+
+/* Intro */
+#intro{display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 15%,#243b72,#0f172a 55%,#050816);color:white;position:relative}
+.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:70px 70px;opacity:.15}
+.introBox{text-align:center;z-index:2;width:min(650px,92%);padding:30px}
+.introBox h1{font-size:clamp(30px,7vw,58px);margin-bottom:10px}
+.introBox p{color:#cbd5e1;font-size:16px;margin-bottom:30px}
+.scene{height:230px;position:relative;display:flex;align-items:flex-end;justify-content:center;margin-bottom:18px}
+.lamp{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:100px;height:70px;border-radius:50% 50% 18px 18px;background:#111827;box-shadow:0 0 0 4px #334155}
+.lamp:after{content:"";position:absolute;left:45px;bottom:-155px;width:10px;height:160px;background:#334155}
+.bulb{position:absolute;left:50%;top:78px;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#172033;box-shadow:0 0 0 transparent;transition:.8s}
+.lightOn .bulb{background:#fff7ae;box-shadow:0 0 25px 12px #fde68a,0 0 90px 35px rgba(250,204,21,.35)}
+.boy{position:absolute;bottom:0;left:20%;width:95px;height:175px;animation:walk 3.4s ease-in-out infinite}
+.head{width:48px;height:48px;border-radius:50%;background:#d49a73;margin:auto;position:relative;box-shadow:inset -5px -4px rgba(0,0,0,.1)}
+.hair{position:absolute;top:-7px;left:2px;width:45px;height:25px;border-radius:50% 55% 35% 35%;background:#161616}
+.body{width:58px;height:75px;border-radius:18px 18px 10px 10px;background:linear-gradient(135deg,#38bdf8,#2563eb);margin:4px auto}
+.leg{position:absolute;width:14px;height:65px;background:#1e293b;bottom:0;border-radius:10px;transform-origin:top}
+.leg.l{left:30px;animation:step1 .7s infinite alternate}.leg.r{left:54px;animation:step2 .7s infinite alternate}
+.arm{position:absolute;width:12px;height:57px;background:#d49a73;top:56px;border-radius:10px;transform-origin:top}.arm.l{left:14px;animation:arm1 .7s infinite alternate}.arm.r{right:10px;animation:arm2 .7s infinite alternate}
+.bag{position:absolute;width:42px;height:55px;background:#7c3aed;border-radius:12px;right:-18px;top:60px;transform:rotate(12deg)}
+.string{position:absolute;right:17px;top:45px;width:48px;height:45px;border:3px solid #94a3b8;border-bottom:0;border-left:0;border-radius:0 25px 0 0;transform:rotate(15deg)}
+.pull{position:absolute;left:62%;top:85px;width:80px;height:3px;background:#94a3b8;transform:rotate(30deg);transform-origin:left}
+.pull:after{content:"";position:absolute;right:-8px;top:-9px;width:20px;height:20px;border-radius:50%;background:#f8fafc;box-shadow:0 0 10px #fff}
+@keyframes walk{0%,100%{left:20%}50%{left:55%}}@keyframes step1{to{transform:rotate(22deg)}}@keyframes step2{to{transform:rotate(-22deg)}}@keyframes arm1{to{transform:rotate(-20deg)}}@keyframes arm2{to{transform:rotate(20deg)}}
+.openBtn{border:0;background:linear-gradient(135deg,#22c55e,#06b6d4);color:white;padding:14px 28px;border-radius:999px;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(6,182,212,.25)}
+
+/* Auth */
+.authWrap{display:flex;align-items:center;justify-content:center;padding:25px;background:linear-gradient(135deg,#e0f2fe,#f5f3ff);min-height:100vh}
+.authCard{width:min(430px,94%);background:rgba(255,255,255,.95);padding:28px;border-radius:24px;box-shadow:0 20px 60px rgba(15,23,42,.15)}
+.logo{font-size:28px;font-weight:900;color:var(--navy);text-align:center;margin-bottom:5px}.tag{text-align:center;color:var(--muted);margin-bottom:22px}
+.authCard h2{margin-bottom:18px}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input{width:100%;padding:13px;border:1px solid #dbe3ef;border-radius:12px;outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.primary{width:100%;border:0;border-radius:12px;padding:13px;background:linear-gradient(135deg,var(--blue),#7c3aed);color:white;font-weight:800;cursor:pointer;margin-top:8px}
+.links{display:flex;justify-content:space-between;margin-top:15px}.links button{background:none;border:0;color:var(--blue);font-weight:700;cursor:pointer}
+.note{font-size:12px;color:#64748b;margin-top:12px;line-height:1.5}
+
+/* App */
+#app{min-height:100vh}.top{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:white;padding:22px max(18px,calc((100% - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:15px}.top h1{font-size:24px}.logout{border:1px solid rgba(255,255,255,.3);background:transparent;color:white;padding:9px 13px;border-radius:10px;cursor:pointer}
+.container{width:min(1100px,94%);margin:25px auto 110px}.welcome{background:white;padding:20px;border-radius:18px;box-shadow:0 8px 30px rgba(15,23,42,.07);margin-bottom:22px}.welcome h2{margin-bottom:5px}.welcome p{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.service{background:white;border-radius:20px;padding:20px;box-shadow:0 8px 30px rgba(15,23,42,.07);border:1px solid #e8eef7}
+.serviceHead{display:flex;align-items:center;gap:12px;margin-bottom:15px}.icon{width:45px;height:45px;border-radius:13px;background:#eff6ff;display:grid;place-items:center;font-size:23px}.service h3{font-size:18px}.service small{color:var(--muted)}
+.option{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid #eef2f7;gap:10px}.option label{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:14px}.price{font-weight:800;white-space:nowrap;color:#0f766e}
+.whatsapp{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);width:min(600px,92%);border:0;border-radius:999px;background:#16a34a;color:white;padding:15px 22px;font-weight:900;box-shadow:0 12px 35px rgba(22,163,74,.3);cursor:pointer;font-size:16px}
+.empty{color:#b91c1c;font-size:13px;margin-top:10px;display:none}
+</style>
+</head>
+<body>
+
+<section id="intro" class="screen">
+ <div class="stars"></div>
+ <div class="introBox">
+  <div class="scene" id="scene">
+   <div class="lamp"></div><div class="bulb"></div>
+   <div class="pull"></div>
+   <div class="boy"><div class="head"><div class="hair"></div></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="bag"></div><div class="string"></div><div class="leg l"></div><div class="leg r"></div></div>
+  </div>
+  <h1>Digital Seva</h1><p>Your simple gateway to online document services</p>
+  <button class="openBtn" onclick="openAuth()">Open Service Portal</button>
+ </div>
+</section>
+
+<section id="auth" class="screen authWrap hidden">
+ <div class="authCard">
+  <div class="logo">Digital Seva</div><div class="tag">Secure Service Portal</div>
+  <div id="loginBox">
+   <h2>Login</h2>
+   <div class="field"><label>Username</label><input id="loginUser" autocomplete="username" placeholder="Enter username"></div>
+   <div class="field"><label>Password</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="Enter password"></div>
+   <button class="primary" onclick="login()">Login</button>
+   <div class="links"><button onclick="showRegister()">Register</button><button onclick="showForgot()">Forgot Password?</button></div>
+   <p class="note">Demo version: account details are stored locally in this browser.</p>
+  </div>
+  <div id="registerBox" class="hidden">
+   <h2>Create Account</h2>
+   <div class="field"><label>Mobile Number</label><input id="regMobile" inputmode="numeric" maxlength="10" placeholder="10 digit mobile number"></div>
+   <div class="field"><label>Username</label><input id="regUser" placeholder="Create username"></div>
+   <div class="field"><label>Password</label><input id="regPass" type="password" placeholder="Create password"></div>
+   <div class="field"><label>Confirm Password</label><input id="regConfirm" type="password" placeholder="Confirm password"></div>
+   <button class="primary" onclick="register()">Register</button>
+   <div class="links"><button onclick="showLogin()">← Back to Login</button></div>
+  </div>
+  <div id="forgotBox" class="hidden">
+   <h2>Reset Password</h2>
+   <div id="step1">
+    <div class="field"><label>Mobile Number</label><input id="forgotMobile" inputmode="numeric" maxlength="10" placeholder="Registered mobile number"></div>
+    <button class="primary" onclick="sendOtp()">Send OTP</button>
+   </div>
+   <div id="step2" class="hidden">
+    <div class="field"><label>OTP</label><input id="otp" inputmode="numeric" maxlength="6" placeholder="Enter OTP"></div>
+    <div class="field"><label>New Password</label><input id="newPass" type="password" placeholder="New password"></div>
+    <div class="field"><label>Confirm Password</label><input id="newConfirm" type="password" placeholder="Confirm new password"></div>
+    <button class="primary" onclick="resetPassword()">Reset Password</button>
+   </div>
+   <p class="note" id="otpNote"></p>
+   <div class="links"><button onclick="showLogin()">← Back to Login</button></div>
+  </div>
+ </div>
+</section>
+
+<section id="app" class="hidden">
+ <header class="top"><div><h1>Digital Seva</h1><small>Online Document Services</small></div><button class="logout" onclick="logout()">Logout</button></header>
+ <main class="container">
+  <div class="welcome"><h2>Choose Your Services</h2><p>Select one or more services, then tap WhatsApp below to send your request automatically.</p></div>
+  <div class="grid">
+   <div class="service"><div class="serviceHead"><div class="icon">🪪</div><div><h3>Aadhaar Card</h3><small>Update services</small></div></div><div class="option"><label><input type="checkbox" data-name="Aadhaar Card - Email ID Update" data-price="150"> Email ID Update</label><span class="price">₹150</span></div></div>
+   <div class="service"><div class="serviceHead"><div class="icon">🧾</div><div><h3>PAN Card</h3><small>New & update</small></div></div><div class="option"><label><input type="checkbox" data-name="New PAN Card" data-price="300"> New PAN Card</label><span class="price">₹300</span></div><div class="option"><label><input type="checkbox" data-name="PAN Card Update" data-price="200"> PAN Card Update</label><span class="price">₹200</span></div></div>
+   <div class="service"><div class="serviceHead"><div class="icon">👷</div><div><h3>E-Shram Card</h3><small>Registration & update</small></div></div><div class="option"><label><input type="checkbox" data-name="New E-Shram Card" data-price="200"> New E-Shram Card</label><span class="price">₹200</span></div><div class="option"><label><input type="checkbox" data-name="E-Shram Card Update" data-price="150"> E-Shram Card Update</label><span class="price">₹150</span></div></div>
+   <div class="service"><div class="serviceHead"><div class="icon">🚗</div><div><h3>PUC</h3><small>Vehicle document service</small></div></div><div class="option"><label><input type="checkbox" data-name="PUC Mobile Number Update" data-price="150"> Mobile Number Update</label><span class="price">₹150</span></div></div>
+   <div class="service"><div class="serviceHead"><div class="icon">🛵</div><div><h3>Driving Licence</h3><small>Licence services</small></div></div><div class="option"><label><input type="checkbox" data-name="Bike Driving Licence" data-price="1350"> Bike Driving Licence</label><span class="price">₹1350</span></div><div class="option"><label><input type="checkbox" data-name="Car Driving Licence" data-price="2100"> Car Driving Licence</label><span class="price">₹2100</span></div><div class="option"><label><input type="checkbox" data-name="Driving Licence Mobile Number Update" data-price="150"> Mobile Number Update</label><span class="price">₹150</span></div></div>
+  </div>
+ </main>
+ <button class="whatsapp" onclick="sendWhatsApp()">💬 Send Selected Services on WhatsApp</button>
+</section>
+
+<script>
+const WA="919274266242";
+function qs(id){return document.getElementById(id)}
+function openAuth(){qs('intro').classList.add('hidden');qs('auth').classList.remove('hidden')}
+function showLogin(){qs('loginBox').classList.remove('hidden');qs('registerBox').classList.add('hidden');qs('forgotBox').classList.add('hidden')}
+function showRegister(){qs('loginBox').classList.add('hidden');qs('registerBox').classList.remove('hidden');qs('forgotBox').classList.add('hidden')}
+function showForgot(){qs('loginBox').classList.add('hidden');qs('registerBox').classList.add('hidden');qs('forgotBox').classList.remove('hidden');qs('step1').classList.remove('hidden');qs('step2').classList.add('hidden');qs('otpNote').textContent=''}
+function register(){
+ const mobile=qs('regMobile').value.trim(), user=qs('regUser').value.trim(), pass=qs('regPass').value, con=qs('regConfirm').value;
+ if(!/^[0-9]{10}$/.test(mobile)) return alert('Please enter a valid 10 digit mobile number.');
+ if(!user||!pass) return alert('Please fill all fields.');
+ if(pass!==con) return alert('Password and Confirm Password do not match.');
+ localStorage.setItem('digitalSevaUser',JSON.stringify({mobile,username:user,password:pass}));
+ alert('Registration successful. Now login with your new password.');
+ showLogin(); qs('loginUser').value=user; qs('loginPass').value='';
+}
+function login(){
+ const u=JSON.parse(localStorage.getItem('digitalSevaUser')||'null');
+ if(!u) return alert('No account found. Please register first.');
+ if(qs('loginUser').value.trim()===u.username && qs('loginPass').value===u.password){qs('auth').classList.add('hidden');qs('app').classList.remove('hidden')}
+ else alert('Incorrect username or password.');
+}
+function sendOtp(){
+ const u=JSON.parse(localStorage.getItem('digitalSevaUser')||'null');
+ if(!u) return alert('Please register first.');
+ if(qs('forgotMobile').value.trim()!==u.mobile) return alert('Mobile number not found.');
+ const otp=Math.floor(100000+Math.random()*900000).toString();
+ sessionStorage.setItem('demoOtp',otp);
+ qs('step1').classList.add('hidden');qs('step2').classList.remove('hidden');
+ qs('otpNote').textContent='Demo OTP: '+otp+' (Real SMS OTP requires an SMS/OTP backend service.)';
+}
+function resetPassword(){
+ const u=JSON.parse(localStorage.getItem('digitalSevaUser')||'null');
+ if(qs('otp').value!==sessionStorage.getItem('demoOtp')) return alert('Invalid OTP.');
+ if(!qs('newPass').value||qs('newPass').value!==qs('newConfirm').value) return alert('Passwords do not match.');
+ u.password=qs('newPass').value;localStorage.setItem('digitalSevaUser',JSON.stringify(u));sessionStorage.removeItem('demoOtp');
+ alert('Password changed successfully. Please login with your new password.');
+ showLogin();qs('loginUser').value=u.username;
+}
+function logout(){qs('app').classList.add('hidden');qs('auth').classList.remove('hidden');showLogin()}
+function sendWhatsApp(){
+ const selected=[...document.querySelectorAll('input[type=checkbox]:checked')];
+ if(!selected.length) return alert('Please select at least one service.');
+ let total=0;
+ let lines=selected.map((x,i)=>{total+=Number(x.dataset.price);return (i+1)+'. '+x.dataset.name+' - ₹'+x.dataset.price});
+ const user=JSON.parse(localStorage.getItem('digitalSevaUser')||'null');
+ const msg='Hello Digital Seva,%0A%0AI want to request the following services:%0A'+lines.join('%0A')+'%0A%0ATotal: ₹'+total+'%0AUsername: '+(user?.username||'')+'%0A%0APlease guide me for the next steps.';
+ window.open('https://wa.me/'+WA+'?text='+msg,'_blank');
+}
+setTimeout(()=>{qs('scene').classList.add('lightOn')},1800);
+</script>
+</body>
+</html>
